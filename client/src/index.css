@@ -1,0 +1,32 @@
+﻿:root {
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  color: #202338;
+  background: #f8f9fc;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.6;
+  color-scheme: light;
+  --accent: #5650cb;
+  --muted: #697184;
+  --border: #e7e9f1;
+}
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; }
+button, input { font: inherit; }
+button { cursor: pointer; border: 0; }
+button:disabled { cursor: not-allowed; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { line-height: 1.2; color: #22263a; }
+h1 { font-size: clamp(30px, 3.3vw, 42px); letter-spacing: -1.5px; font-weight: 700; }
+h2 { font-size: 23px; letter-spacing: -.6px; }
+h3 { font-size: 16px; }
+p { color: var(--muted); }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid #8b85eb; outline-offset: 4px; }
+::selection { background: #ddd9ff; }
+svg { flex-shrink: 0; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
