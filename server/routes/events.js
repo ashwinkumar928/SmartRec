@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const events = [];
+const events = require("../data/events");
 
 router.post("/", (req, res) => {
   const {

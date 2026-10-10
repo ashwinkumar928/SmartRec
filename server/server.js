@@ -4,6 +4,7 @@ require("dotenv").config();
 const eventRoutes = require("./routes/events");
 
 const productRoutes = require("./routes/products");
+const recommendationRoutes = require("./routes/recommendations");
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/products", productRoutes);
 app.use("/api/events", eventRoutes);
+app.use("/api/recommendations", recommendationRoutes);
 
 const PORT = process.env.PORT || 5000;
 

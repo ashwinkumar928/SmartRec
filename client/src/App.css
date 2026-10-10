@@ -243,6 +243,17 @@ progress::-moz-progress-bar { background: #746bd4; border-radius: 9px; }
 }
 
 
+/* Shop recommendations */
+.shop-recommendations { margin-top: 36px; padding-top: 30px; border-top: 1px solid var(--border); }
+.recommendations-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+.recommendations-subtitle { font-size: 13px; margin-bottom: 18px; }
+.current-interests { margin-bottom: 24px; }
+.current-interests ul { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 14px 0 0; }
+.current-interests .pill { white-space: normal; overflow-wrap: anywhere; max-width: 100%; }
+.recommendation-info { border-top: 1px solid var(--border); padding-top: 10px; margin-bottom: 14px; font-size: 11px; overflow-wrap: anywhere; }
+.recommendation-info > span { color: var(--accent); font-weight: 600; }
+.recommendation-info p { margin-top: 4px; }
+
 /* Product details: scoped to preserve existing page layouts. */
 .details-back { margin-bottom: 24px; }
 .product-details { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); background: white; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }

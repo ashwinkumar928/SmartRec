@@ -1,5 +1,31 @@
 ﻿export const API_BASE_URL = 'http://localhost:5000'
 
+export async function getRecommendations(userId = 1, { signal } = {}) {
+  let response
+  try {
+    response = await fetch(`${API_BASE_URL}/api/recommendations/${encodeURIComponent(userId)}`, { signal })
+  } catch (error) {
+    if (error.name === 'AbortError') throw error
+    throw new Error('Unable to connect to the recommendation API. Please try again.', { cause: error })
+  }
+  if (!response.ok) throw new Error(`Unable to load recommendations (HTTP ${response.status}). Please try again.`)
+  let data
+  try {
+    data = await response.json()
+  } catch (error) {
+    if (error.name === 'AbortError') throw error
+    throw new Error('The recommendation API returned invalid JSON.', { cause: error })
+  }
+  if (!data || !data.interestScores || typeof data.interestScores !== 'object' || Array.isArray(data.interestScores)
+    || Object.values(data.interestScores).some(score => !Number.isFinite(score))
+    || !Array.isArray(data.recommendations)
+    || data.recommendations.some(product => !product || product.id == null || typeof product.name !== 'string'
+      || !Number.isFinite(product.recommendationScore) || typeof product.reason !== 'string')) {
+    throw new Error('The recommendation API returned an unexpected format.')
+  }
+  return data
+}
+
 export async function getProducts({ signal } = {}) {
   let response
   try {

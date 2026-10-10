@@ -20,6 +20,9 @@ function ProductDetailsContent({ id }) {
   const [attempt, setAttempt] = useState(0)
   const [failedImage, setFailedImage] = useState(null)
   const trackedProductRef = useRef(null)
+  const cartRequestRef = useRef(false)
+  const [addingToCart, setAddingToCart] = useState(false)
+  const [cartMessage, setCartMessage] = useState('')
 
   useEffect(() => {
     const controller = new AbortController()
@@ -48,6 +51,27 @@ function ProductDetailsContent({ id }) {
       category: product.category,
     })
   }, [product])
+
+  async function handleAddToCart() {
+    if (!product || cartRequestRef.current) return
+    // Lock immediately, including clicks before React updates the button.
+    cartRequestRef.current = true
+    setAddingToCart(true)
+    setCartMessage('')
+    try {
+      const event = await trackEvent({
+        userId: 1,
+        eventType: 'CART',
+        productId: product.id,
+        category: product.category,
+      })
+      // trackEvent returns undefined when the request fails.
+      setCartMessage(event ? 'Added to cart' : 'Unable to add to cart. Please try again.')
+    } finally {
+      cartRequestRef.current = false
+      setAddingToCart(false)
+    }
+  }
 
   function retry() {
     setError('')
@@ -93,8 +117,10 @@ function ProductDetailsContent({ id }) {
                 <ul>{product.tags.map((tag, index) => <li className="pill" key={`${tag}-${index}`}>{tag}</li>)}</ul>
               ) : <p>No tags available.</p>}
             </div>
-            <button className="button primary details-cart" type="button" disabled aria-describedby="cart-coming-soon">Add to Cart</button>
-            <p id="cart-coming-soon" className="details-note">Cart functionality is coming soon.</p>
+            <button className="button primary details-cart" type="button" disabled={addingToCart} onClick={handleAddToCart} aria-describedby="cart-status" aria-busy={addingToCart}>
+              {addingToCart ? 'Adding…' : 'Add to Cart'}
+            </button>
+            <p id="cart-status" className="details-note" role="status">{cartMessage}</p>
           </div>
         </article>
       )}
