@@ -19,7 +19,7 @@ function ProductDetailsContent({ id }) {
   const [error, setError] = useState('')
   const [attempt, setAttempt] = useState(0)
   const [failedImage, setFailedImage] = useState(null)
-  const hasTrackedView = useRef(false)
+  const trackedProductRef = useRef(null)
 
   useEffect(() => {
     const controller = new AbortController()
@@ -38,9 +38,9 @@ function ProductDetailsContent({ id }) {
   }, [id, attempt])
 
   useEffect(() => {
-    if (!product || hasTrackedView.current) return
+    if (!product || trackedProductRef.current === product.id) return
     // Set before sending so effect replays cannot post a second event.
-    hasTrackedView.current = true
+    trackedProductRef.current = product.id
     void trackEvent({
       userId: 1,
       eventType: 'VIEW',
