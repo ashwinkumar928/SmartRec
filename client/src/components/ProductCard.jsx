@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const priceFormatter = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 2 })
 
-export default function ProductCard({ product, showRecommendationInfo = false }) {
+export default function ProductCard({ product, showRecommendationInfo = false, buttonLabel = 'View Product' }) {
   const [failedImage, setFailedImage] = useState(null)
   const hasPrice = product.price != null && product.price !== '' && Number.isFinite(Number(product.price))
   return (
@@ -23,7 +23,7 @@ export default function ProductCard({ product, showRecommendationInfo = false })
             <p>{product.reason}</p>
           </div>
         )}
-        <Link className="button product-button" to={`/product/${encodeURIComponent(product.id)}`}>View Product <span aria-hidden="true">↗</span></Link>
+        <Link className="button product-button" to={`/product/${encodeURIComponent(product.id)}`}>{buttonLabel} <span aria-hidden="true">↗</span></Link>
       </div>
     </article>
   )

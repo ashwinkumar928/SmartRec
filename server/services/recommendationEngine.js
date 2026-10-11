@@ -1,11 +1,15 @@
-const events = require("../data/events");
+const pool = require("../config/db");
+const { toApiEvent } = require("./eventMapper");
 const products = require("../data/products");
 
 const WEIGHTS = { SEARCH: 1, VIEW: 2, CART: 6 };
 
-function generateRecommendations(userId) {
-  // Route parameters are strings; tracked user IDs may be numbers.
-  const userEvents = events.filter(event => String(event.userId) === String(userId));
+async function generateRecommendations(userId) {
+  const { rows } = await pool.query(
+    "SELECT * FROM user_events WHERE user_id = $1 ORDER BY created_at ASC",
+    [userId]
+  );
+  const userEvents = rows.map(toApiEvent);
   const categoryScores = new Map();
 
   function addScore(category, weight) {
