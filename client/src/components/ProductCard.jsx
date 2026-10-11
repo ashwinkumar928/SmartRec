@@ -4,20 +4,20 @@ import { Link } from 'react-router-dom'
 
 const priceFormatter = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 2 })
 
-export default function ProductCard({ product, showRecommendationInfo = false, buttonLabel = 'View Product' }) {
+export default function ProductCard({ product, showRecommendationInfo = false, buttonLabel = 'View Product', imageSrc = product.image }) {
   const [failedImage, setFailedImage] = useState(null)
   const hasPrice = product.price != null && product.price !== '' && Number.isFinite(Number(product.price))
   return (
     <article className="product-card">
       <div className="product-image">
-        {product.image && failedImage !== product.image ? <img src={product.image} alt={product.name} loading="lazy" onError={() => setFailedImage(product.image)} /> : <div className="image-fallback"><span aria-hidden="true">◇</span><span>Image unavailable</span></div>}
+        {imageSrc && failedImage !== imageSrc ? <img src={imageSrc} alt={product.name} loading="lazy" decoding="async" onError={() => setFailedImage(imageSrc)} /> : <div className="image-fallback"><span aria-hidden="true">◇</span><span>Image unavailable</span></div>}
         <span className="category-label">{product.category || 'Product'}</span>
       </div>
       <div className="product-body">
         <div className="product-meta"><span className="eyebrow">{product.brand || 'Unbranded'}</span><span className="rating"><span aria-hidden="true">★</span> {product.rating != null ? `${product.rating} / 5` : 'Unrated'}</span></div>
         <h2>{product.name}</h2>
         <p className="product-price">{hasPrice ? priceFormatter.format(Number(product.price)) : 'Price unavailable'}</p>
-        {showRecommendationInfo && (
+        {showRecommendationInfo && Number.isFinite(product.recommendationScore) && typeof product.reason === 'string' && (
           <div className="recommendation-info">
             <span>Score: {product.recommendationScore}</span>
             <p>{product.reason}</p>

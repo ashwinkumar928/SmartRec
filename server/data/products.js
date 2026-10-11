@@ -8,7 +8,7 @@ const products = [
     color: "Black",
     tags: ["black", "shirt", "oversized", "casual", "cotton"],
     rating: 4.5,
-    image: "https://placehold.co/400x500?text=Black+Shirt"
+    image: "/products/black-shirt.png"
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ const products = [
     color: "White",
     tags: ["white", "shirt", "casual", "cotton"],
     rating: 4.3,
-    image: "https://placehold.co/400x500?text=White+Shirt"
+    image: "/products/white-shirt.png"
   },
   {
     id: 3,
@@ -30,7 +30,7 @@ const products = [
     color: "Black",
     tags: ["shoes", "running", "sports", "black"],
     rating: 4.7,
-    image: "https://placehold.co/400x500?text=Running+Shoes"
+    image: "/products/running-shoes.png"
   },
   {
     id: 4,
@@ -41,7 +41,7 @@ const products = [
     color: "Blue",
     tags: ["jeans", "blue", "denim", "casual"],
     rating: 4.4,
-    image: "https://placehold.co/400x500?text=Blue+Jeans"
+    image: "/products/blue-jeans.png"
   },
   {
     id: 5,
@@ -52,7 +52,7 @@ const products = [
     color: "Black",
     tags: ["watch", "smartwatch", "electronics", "fitness"],
     rating: 4.2,
-    image: "https://placehold.co/400x500?text=Smart+Watch"
+    image: "/products/smart-watch.png"
   }
 ];
 
