@@ -7,28 +7,33 @@
 .discover-tabs small { font-size: 9px; padding: 2px 5px; background: #eeeff4; border-radius: 4px; }
 .discover-layout { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(280px, 1fr); gap: 32px; align-items: start; }
 .discover-feed, .discover-sidebar { display: grid; gap: 22px; min-width: 0; }
+.discover-feed { gap: 18px; }
 .discover-post, .discover-ad, .discover-insight { background: white; border: 1px solid var(--border); border-radius: 17px; overflow: hidden; box-shadow: 0 4px 18px #20233804; transition: box-shadow .2s, border-color .2s; }
 .discover-post:hover, .discover-ad:hover { border-color: #d7d3e9; box-shadow: 0 7px 24px #20233809; }
-.discover-post-header { display: flex; gap: 11px; align-items: center; padding: 18px 20px; }
+.discover-post-header { display: flex; gap: 11px; align-items: center; padding: 15px 20px; }
+.discover-post-author { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.discover-author-line { display: flex; flex-wrap: wrap; align-items: baseline; gap: 3px 8px; }
+.discover-author-line > span { font-size: 11px; color: var(--muted); }
 .discover-post-header h2 { font-size: 13px; letter-spacing: 0; }
 .discover-post-header p { font-size: 11px; margin-top: 4px; }
 .discover-avatar { display: grid; place-items: center; width: 40px; height: 40px; flex-shrink: 0; border-radius: 50%; font-size: 12px; font-weight: 650; }
 .discover-avatar.sand { background: #eee5db; color: #795f4e; }
 .discover-avatar.sage { background: #e3ece4; color: #486d56; }
 .discover-avatar.blue { background: #e4e9f6; color: #586b93; }
+.discover-avatar.lavender { background: #eee9f8; color: #75618f; }
 .discover-demo { margin-left: auto; color: var(--muted); font-size: 10px; white-space: nowrap; }
 .discover-post-image { position: relative; aspect-ratio: 4 / 3; background: #eeeae5; overflow: hidden; }
 .discover-post-image img, .discover-ad-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .discover-collection { position: absolute; bottom: 16px; left: 20px; padding: 6px 11px; background: #fffffff0; color: #343248; border-radius: 6px; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; font-weight: 600; }
-.discover-post-body { padding: 13px 20px 20px; }
-.discover-actions { display: flex; gap: 3px; align-items: center; margin-left: -9px; }
-.discover-actions > span { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; color: #51546b; transition: color .2s, background .2s; }
+.discover-post-body { padding: 8px 20px 17px; }
+.discover-actions { display: flex; gap: 6px; align-items: center; margin-left: -11px; }
+.discover-actions > span { display: grid; place-items: center; width: 44px; height: 44px; flex-shrink: 0; border-radius: 50%; color: #51546b; transition: color .2s, background .2s; }
 .discover-actions > span:hover { color: var(--accent); background: #f2effc; }
 .discover-actions > small { margin-left: auto; color: var(--muted); font-size: 11px; }
 .discover-page .discover-likes { color: #313448; font-size: 12px; font-weight: 650; margin: 3px 0 8px; }
 .discover-caption { font-size: 13px; line-height: 1.8; color: #586074; }
 .discover-caption strong { color: #303448; margin-right: 4px; }
-.discover-timestamp { font-size: 10px; margin-top: 12px; }
+.discover-timestamp { font-size: 10px; white-space: nowrap; }
 .discover-feed-note, .discover-sidebar-note { text-align: center; font-size: 11px; padding: 4px 12px; }
 .discover-sidebar-heading { display: flex; justify-content: space-between; align-items: center; color: var(--accent); }
 .discover-sidebar-heading h2 { font-size: 16px; letter-spacing: -.3px; }
@@ -71,7 +76,6 @@
 .discover-skeleton-button { height: 44px; margin-top: 24px; }
 @media (max-width: 900px) {
   .discover-layout { gap: 20px; grid-template-columns: minmax(0, 1.3fr) minmax(260px, 1fr); }
-  .discover-post-header { flex-wrap: wrap; }
 }
 @media (max-width: 700px) {
   .discover-layout { grid-template-columns: minmax(0, 1fr); gap: 30px; }

@@ -4,9 +4,10 @@ import { getRecommendations } from '../services/api'
 import './SocialFeed.css'
 
 const posts = [
-  { initials: 'MJ', name: 'Maya Jones', topic: '@mayajones · Everyday style', time: '2 hours ago', image: '/social/street-lifestyle.jpg', alt: 'A lively city street with pedestrians, tall buildings, and yellow taxis', collection: 'The everyday edit', text: 'A little less effort, a little more you. A relaxed shirt and your favorite denim are always a good place to start.', likes: 124, comments: 6, tone: 'sand' },
-  { initials: 'AL', name: 'Alex Lee', topic: '@alexoutside · Life in motion', time: '4 hours ago', image: '/social/morning-walk.jpg', alt: 'Sunlight falling across a quiet walking trail through green woodland', collection: 'Room to roam', text: 'Swapped screen time for a morning walk. Fresh air, a good playlist, and a pair that can keep up. Small routines make a difference.', likes: 238, comments: 14, tone: 'sage' },
-  { initials: 'SK', name: 'Sam Kapoor', topic: '@samcurates · Weekend essentials', time: '6 hours ago', image: '/social/weekend-cafe.jpg', alt: 'A cozy cafe interior with warm pendant lights and a handwritten menu', collection: 'On repeat', text: 'The pieces you reach for again and again. Keeping this weekend simple with denim that goes with just about everything.', likes: 86, comments: 3, tone: 'blue' },
+  { initials: 'MJ', name: 'Maya Jones', handle: '@mayajones', topic: 'City life', time: '2 hours ago', image: '/social/street-lifestyle.jpg', alt: 'A lively city street with pedestrians, tall buildings, and yellow taxis', collection: 'Taking the scenic route', text: 'Took the long way through the city today. No plans, just a slow wander and a few stops to watch the world go by. My kind of afternoon.', likes: 124, comments: 6, tone: 'sand' },
+  { initials: 'AL', name: 'Alex Lee', handle: '@alexoutside', topic: 'Morning routine', time: '4 hours ago', image: '/social/morning-walk.jpg', alt: 'Sunlight falling across a quiet walking trail through green woodland', collection: 'Room to roam', text: 'Left my phone in my pocket for most of this morning’s walk. The light through these trees was worth stopping for. A little fresh air before the day gets busy.', likes: 238, comments: 14, tone: 'sage' },
+  { initials: 'SK', name: 'Sam Kapoor', handle: '@samcurates', topic: 'Slow weekends', time: '6 hours ago', image: '/social/weekend-cafe.jpg', alt: 'A cozy cafe interior with warm pendant lights and a handwritten menu', collection: 'Nowhere to rush', text: 'Found a cozy cafe and stayed longer than planned. Coffee, a quiet corner, and absolutely nothing on the schedule. Keeping weekends like this.', likes: 86, comments: 3, tone: 'blue' },
+  { initials: 'RP', name: 'Riya Patel', handle: '@riya.notes', topic: 'Creative work', time: '8 hours ago', image: '/social/creative-workspace.jpg', alt: 'A laptop, coffee, and handwritten notes on a wooden desk beside a window', collection: 'One page at a time', text: 'Coffee ready, notebook open. Spending a quiet hour sorting my notes and planning the next little project. Writing things down always helps me find a starting point.', likes: 72, comments: 5, tone: 'lavender' },
 ]
 const currency = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 2 })
 
@@ -28,11 +29,15 @@ function FeedImage({ src, alt }) {
 
 function SocialPost({ post }) {
   return <article className="discover-post">
-    <header className="discover-post-header"><span className={`discover-avatar ${post.tone}`} aria-hidden="true">{post.initials}</span><div><h2>{post.name}</h2><p>{post.topic}</p></div><span className="discover-demo">Sample post</span></header>
+    <header className="discover-post-header">
+      <span className={`discover-avatar ${post.tone}`} aria-hidden="true">{post.initials}</span>
+      <div className="discover-post-author"><div className="discover-author-line"><h2>{post.name}</h2><span>{post.handle}</span></div><p>{post.topic} <span aria-hidden="true">·</span> <span className="discover-timestamp">{post.time}</span></p></div>
+      <span className="discover-demo">Sample post</span>
+    </header>
     <div className="discover-post-image"><FeedImage src={post.image} alt={post.alt} /><span className="discover-collection">{post.collection}</span></div>
     <div className="discover-post-body">
       <div className="discover-actions" aria-label="Sample post interactions">{['heart', 'comment', 'share'].map((name, i) => <span key={name} title={`${['Likes', 'Comments', 'Share'][i]} · demo`}><Icon name={name} /><span className="sr-only">{['Likes', 'Comments', 'Share'][i]}</span></span>)}<small>{post.comments} comments</small></div>
-      <p className="discover-likes">{post.likes} likes</p><p className="discover-caption"><strong>{post.name}</strong> {post.text}</p><p className="discover-timestamp">{post.time}</p>
+      <p className="discover-likes">{post.likes} likes</p><p className="discover-caption"><strong>{post.name}</strong> {post.text}</p>
     </div>
   </article>
 }
