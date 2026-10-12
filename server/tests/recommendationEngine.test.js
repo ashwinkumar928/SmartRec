@@ -58,12 +58,15 @@ test("cold start returns all products by rating without changing the catalog", a
   const original = JSON.stringify(products);
   const result = await generateRecommendations(1);
   assert.deepEqual(result.interestScores, {});
+  assert.deepEqual(result.tagScores, {});
+  assert.deepEqual(result.brandScores, {});
+  assert.deepEqual(result.keywordScores, {});
   assert.deepEqual(result.recommendations.map(p => p.id), [3, 1, 4, 2, 5]);
   assert.ok(result.recommendations.every(p => p.recommendationScore === 0 && p.reason === "Popular product for new users"));
   assert.equal(JSON.stringify(products), original);
 });
 
-test("weighted behavior ranks categories first, rating second, and isolates users", async () => {
+test("weighted V2 behavior preserves categories and isolates users", async () => {
   fixtures.push(
     { userId: 1, eventType: "SEARCH", searchQuery: "  BLACK   shirt " },
     { userId: "1", eventType: "VIEW", category: "Shirts", productId: 1 },
@@ -74,8 +77,11 @@ test("weighted behavior ranks categories first, rating second, and isolates user
   const result = await generateRecommendations(1);
   assert.deepEqual(result.interestScores, { Shirts: 9, Shoes: 2 });
   assert.deepEqual(result.recommendations.map(p => p.id), [1, 2, 3, 4, 5]);
-  assert.equal(result.recommendations[0].reason, "High interest in Shirts");
-  assert.equal(result.recommendations[0].recommendationScore, 9);
+  assert.equal(result.recommendations[0].reason, "Based on your interest in Shirts, Roadster and black");
+  assert.equal(result.recommendations[0].recommendationScore, 29.25);
+  assert.deepEqual(result.brandScores, { Roadster: 9 });
+  assert.equal(result.tagScores.black, 9);
+  assert.deepEqual(result.keywordScores, { black: 1, shirt: 1 });
   assert.equal(result.recommendations.length, products.length);
 });
 
